@@ -1,0 +1,16 @@
+<article class="card">
+  <a class="link" [routerLink]="['/recipe', recipe.id]" [attr.aria-label]="'Open ' + recipe.name">
+    <div class="image-wrap" *ngIf="recipe.image">
+      <img [src]="recipe.image" [alt]="recipe.name" class="image" loading="lazy" />
+    </div>
+    <div class="content">
+      <h3 class="name">{{ recipe.name }}</h3>
+      <p class="desc">{{ recipe.description }}</p>
+      <div class="meta">
+        <span class="pill" *ngIf="recipe.prepTimeMinutes">Prep {{ recipe.prepTimeMinutes }}m</span>
+        <span class="pill" *ngIf="recipe.cookTimeMinutes">Cook {{ recipe.cookTimeMinutes }}m</span>
+        <span class="pill alt" *ngIf="recipe.servings">{{ recipe.servings }} servings</span>
+      </div>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,39 @@
+<section class="wrap">
+  <a class="back" routerLink="/">← Back to recipes</a>
+
+  <div *ngIf="loading()" class="loading">Loading recipe...</div>
+
+  <article *ngIf="!loading() && recipe(); else notFound" class="card">
+    <div class="media" *ngIf="recipe()?.image">
+      <img [src]="recipe()!.image" [alt]="recipe()!.name" />
+    </div>
+    <div class="body">
+      <h2 class="title">{{ recipe()!.name }}</h2>
+      <p class="desc">{{ recipe()!.description }}</p>
+      <div class="meta">
+        <span class="pill" *ngIf="recipe()!.prepTimeMinutes">Prep {{ recipe()!.prepTimeMinutes }}m</span>
+        <span class="pill" *ngIf="recipe()!.cookTimeMinutes">Cook {{ recipe()!.cookTimeMinutes }}m</span>
+        <span class="pill alt" *ngIf="recipe()!.servings">{{ recipe()!.servings }} servings</span>
+      </div>
+
+      <div class="cols">
+        <section>
+          <h3>Ingredients</h3>
+          <ul class="list">
+            <li *ngFor="let ing of recipe()!.ingredients">{{ ing }}</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Instructions</h3>
+          <ol class="list">
+            <li *ngFor="let step of recipe()!.instructions">{{ step }}</li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </article>
+
+  <ng-template #notFound>
+    <p class="empty">Recipe not found.</p>
+  </ng-template>
+</section>

@@ -1,0 +1,25 @@
+<section class="wrap">
+  <div class="top">
+    <div class="search">
+      <span class="icon" aria-hidden="true">🔎</span>
+      <input
+        placeholder="Search recipes by name or ingredient..."
+        type="text"
+        [value]="query()"
+        (input)="onSearchChange($any($event.target).value)"
+        aria-label="Search recipes" />
+    </div>
+  </div>
+
+  <div class="grid" *ngIf="!loading(); else loadingTpl">
+    <app-recipe-card *ngFor="let r of filtered()" [recipe]="r"></app-recipe-card>
+  </div>
+
+  <ng-template #loadingTpl>
+    <div class="loading">Loading recipes...</div>
+  </ng-template>
+
+  <p class="empty" *ngIf="!loading() && filtered().length === 0">
+    No recipes match your search.
+  </p>
+</section>
